@@ -621,12 +621,19 @@
             margin: 0 10px;
             color: #444;
         }
-        .contact-links {
+        .contact-links-section {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 10px;
             margin-bottom: 20px;
+            color: white;
+        }
+        .contact-links-section a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.2s;
+            text-decoration: underline solid;
         }
     </style>
 </head>
@@ -634,11 +641,11 @@
     <div class="container">
         <h1>Teen-Tiny LM Visualizer</h1>
         <p class="subtitle">Learn how LLMs predict the next word using 2D embeddings</p>
-<div class="contact-links">
-    <a href="https://github.com/bennet-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <span class="footer-divider">·</span>
+<div class="contact-links-section">
     <a href="https://www.linkedin.com/in/bennet-carpenter-580ba811a" target="_blank"
         rel="noopener noreferrer">LinkedIn</a>
+    <span class="footer-divider">·</span>
+        <a href="https://github.com/bennet-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
 </div>
         <div class="intro-section">
             <h2>What is this?</h2>
