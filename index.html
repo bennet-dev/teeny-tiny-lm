@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Micro-LLM: Understanding Embeddings</title>
+    <title>Teen-Tiny LM: Understanding Embeddings</title>
     <style>
         * {
             box-sizing: border-box;
@@ -597,13 +597,49 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .footer a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: #6366f1;
+        }
+
+        .footer-divider {
+            margin: 0 10px;
+            color: #444;
+        }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Micro-LLM Visualizer</h1>
+        <h1>Teen-Tiny LM Visualizer</h1>
         <p class="subtitle">Learn how LLMs predict the next word using 2D embeddings</p>
-
+<div class="contact-links">
+    <a href="https://github.com/bennet-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <span class="footer-divider">·</span>
+    <a href="https://www.linkedin.com/in/bennet-carpenter-580ba811a" target="_blank"
+        rel="noopener noreferrer">LinkedIn</a>
+</div>
         <div class="intro-section">
             <h2>What is this?</h2>
             <p>Large Language Models (LLMs) like ChatGPT predict text by understanding words as <strong>numbers in space</strong>. This is called an <strong>embedding</strong>—each word becomes a point in a multi-dimensional space where similar words are close together.</p>
@@ -615,6 +651,8 @@
             <p>When you type a prompt, the LLM looks at the words you've used, figures out where you are in "meaning space," and predicts which word would naturally come next based on what's nearby.</p>
 
             <span class="try-it">Try it: Type "I want to eat an" and watch it predict a fruit!</span>
+            
+            
         </div>
 
         <div class="main-layout">
@@ -665,6 +703,7 @@
                         <button class="example-btn" data-prompt="I need to make a call on my">call on my...</button>
                         <button class="example-btn" data-prompt="download the app on my">app on my...</button>
                         <button class="example-btn" data-prompt="fresh squeezed orange">orange juice...</button>
+                        <button class="example-btn" data-prompt="I bought this from the store">from the store...</button>
                     </div>
 
                     <div class="step-indicator" id="stepIndicator" style="display: none;">
@@ -729,33 +768,40 @@
                 <div class="panel">
                     <h2>Why "Apple" is Special</h2>
                     <div class="instructions">
-                        <p>Notice how <strong>"apple"</strong> sits in the middle-right of the graph? It scores high on BOTH axes because:</p>
+                        <p>Notice how <strong>"apple"</strong> sits right in the overlap between the two clusters? It scores moderately high on BOTH axes because:</p>
                         <br>
-                        <p>• It's a <strong>fruit</strong> (high fruitiness)</p>
-                        <p>• It's a <strong>tech company</strong> (high techiness)</p>
+                        <p>• It's a <strong>fruit</strong> (some fruitiness)</p>
+                        <p>• It's a <strong>tech company</strong> (some techiness)</p>
                         <br>
-                        <p>This is why context matters! "I want to eat an..." pulls toward fruity words, while "I need to call on my..." pulls toward techy words. Same word, different predictions based on context.</p>
+                        <p>This is why context matters! "I want to eat an..." pulls toward apple from the fruity side, while "I bought this from the store..." pulls toward apple from the techy side. Same word, reached from two completely different directions.</p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <footer class="footer">
+            <a href="https://github.com/bennet-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <span class="footer-divider">·</span>
+            <a href="https://www.linkedin.com/in/bennet-carpenter-580ba811a" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </footer>
     </div>
 
     <script>
         // Default word embeddings [techy, fruity]
         let embeddings = {
-            'apple': [0.7, 0.8],      // Both a fruit and tech company
-            'banana': [0.1, 0.9],     // Very fruity, not techy
-            'orange': [0.2, 0.85],    // Fruit (also telecom, but less known)
-            'phone': [0.9, 0.1],      // Very techy
-            'computer': [0.95, 0.05], // Very techy
-            'eat': [0.1, 0.7],        // Associated with food/fruit
-            'call': [0.8, 0.1],       // Associated with phones
-            'iphone': [0.95, 0.15],   // Very techy, slight fruit connection
-            'juice': [0.15, 0.85],    // Fruity
-            'laptop': [0.9, 0.05],    // Very techy
-            'grape': [0.1, 0.9],      // Very fruity
-            'app': [0.85, 0.2],       // Techy
+            'apple': [0.55, 0.55],    // Both a fruit and tech company - sits in the overlap
+            'banana': [0.08, 0.92],   // Very fruity, not techy
+            'orange': [0.22, 0.85],   // Fruit (also telecom, but less known)
+            'phone': [0.88, 0.14],    // Very techy
+            'computer': [0.98, 0.02], // Very techy
+            'eat': [0.38, 0.50],      // Pulled toward apple so "eat an..." predicts it
+            'call': [0.80, 0.12],     // Associated with phones
+            'iphone': [0.95, 0.18],   // Very techy, slight fruit connection
+            'juice': [0.18, 0.83],    // Fruity
+            'laptop': [0.95, 0.06],   // Very techy
+            'grape': [0.13, 0.89],    // Very fruity
+            'app': [0.85, 0.22],      // Techy
+            'store': [0.68, 0.48],    // Grocery store or Apple Store - bridges to apple from the techy side
         };
 
         // Canvas setup
